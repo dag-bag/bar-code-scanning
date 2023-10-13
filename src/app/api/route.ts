@@ -4,14 +4,14 @@ import { db } from "../../../firebase.config";
 import { Ticket, Response } from "../../../types";
 import { collection, doc, setDoc, writeBatch } from "firebase/firestore";
 
-
-
 function generateFirestoreDocumentId() {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const charactersLength = characters.length;
-  let documentId = '';
+  let documentId = "";
 
-  for (let i = 0; i < 20; i++) { // You can adjust the length of the document ID here
+  for (let i = 0; i < 5; i++) {
+    // You can adjust the length of the document ID here
     const randomIndex = Math.floor(Math.random() * charactersLength);
     documentId += characters.charAt(randomIndex);
   }
@@ -20,12 +20,15 @@ function generateFirestoreDocumentId() {
 }
 
 function generateArray(num: number): number[] {
-  return Array.from({ length: num }, (_, i) => generateFirestoreDocumentId() as any);
+  return Array.from(
+    { length: num },
+    (_, i) => generateFirestoreDocumentId() as any
+  );
 }
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const ticketIds = generateArray(body.tickets)
+  const ticketIds = generateArray(body.tickets);
   const batch = writeBatch(db);
 
   ticketIds.forEach(async (id) => {
@@ -34,16 +37,16 @@ export async function POST(request: Request) {
       id,
       isExpired: false,
     });
-  })
+  });
 
-  const tickedUrls = ticketIds.map((id) => `https://titcket-2.vercel.app/ticket/${id}`)
+  const tickedUrls = ticketIds.map(
+    (id) => `https://bar-code-kappa.vercel.app/ticket/${id}`
+  );
 
-  batch.commit()
+  batch.commit();
 
   return NextResponse.json({
     tickets: tickedUrls,
-    phone: body.phone
+    phone: body.phone,
   });
-
-
 }
