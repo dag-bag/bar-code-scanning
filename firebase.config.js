@@ -7,14 +7,13 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBcmJTFGouvP-hJT3E1ckCWWRh9no90gas",
-  authDomain: "open-formiz.firebaseapp.com",
-  projectId: "open-formiz",
-  storageBucket: "open-formiz.appspot.com",
-  messagingSenderId: "45841718621",
-  appId: "1:45841718621:web:bbabd1bc4bce4525751cb4",
+  apiKey: "AIzaSyCSEe4k_vf1-KvAvTk1Uj1zSfL563DMyD8",
+  authDomain: "bar-code-e4b9d.firebaseapp.com",
+  projectId: "bar-code-e4b9d",
+  storageBucket: "bar-code-e4b9d.appspot.com",
+  messagingSenderId: "86744558392",
+  appId: "1:86744558392:web:7842441a3d991e3b6dafcd",
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);

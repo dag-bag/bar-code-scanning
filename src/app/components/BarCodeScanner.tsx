@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { QrScanner } from "@yudiel/react-qr-scanner";
 import { db } from "../../../firebase.config";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
-import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 const messages = {
   alredy_expired: "This Ticket is already scanned",
@@ -59,16 +58,10 @@ const QRCodeScanner = () => {
       )}
 
       {status === "open" && message == null && (
-        <BarcodeScannerComponent
-          width={500}
-          height={500}
-          onUpdate={handleDecode}
+        <QrScanner
+          onDecode={handleDecode}
           onError={(error: any) => console.log(error?.message)}
         />
-        // <QrScanner
-        //   onDecode={handleDecode}
-        //   onError={(error: any) => console.log(error?.message)}
-        // />
       )}
 
       {status == "close" && (
