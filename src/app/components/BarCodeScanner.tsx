@@ -13,9 +13,10 @@ const QRCodeScanner = () => {
   const [message, setMessage] = useState<
     "alredy_expired" | "current_expired" | "not_generated" | null
   >(null);
-
+  const [id, setId] = useState("");
   const [status, setStatus] = useState<"loading" | "open" | "close">("close");
   const handleDecode = async (id: any) => {
+    setId(id);
     const docRef = doc(db, "tickets", `${id}`);
     const docSnap = await getDoc(docRef);
     console.log(docSnap.data());
@@ -42,6 +43,7 @@ const QRCodeScanner = () => {
               : "border-red-300 bg-red-100"
           }`}
         >
+          {id}
           <p className="uppercase tracking-wider font-medium text-sm mb-1">
             ALEART
           </p>
